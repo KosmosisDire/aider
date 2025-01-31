@@ -1119,6 +1119,9 @@ class Commands:
             done_messages=[],
             cur_messages=[],
         )
+        coder.gpt_prompts.main_system = ""
+        coder.gpt_prompts.files_no_full_files = ""
+
         user_msg = args
         coder.run(user_msg, preproc=False)
 
