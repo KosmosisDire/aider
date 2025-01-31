@@ -1096,6 +1096,38 @@ class Commands:
             from_coder=coder,
             show_announcements=False,
         )
+    def cmd_justask(self, args):
+        "Ask a standalone question without sending context"
+
+        if not args.strip():
+            self.io.tool_output("Use '/justask <question>' to ask your standalone question.")
+            return
+
+        from aider.coders.base_coder import Coder
+
+        coder = Coder.create(
+            io=self.io,
+            main_model=self.coder.main_model,
+            from_coder=self.coder,
+            edit_format="ask",
+            fnames=[],
+            read_only_fnames=[],
+            map_tokens=0,
+            auto_commits=False,
+            dirty_commits=False,
+            summarize_from_coder=False,
+            done_messages=[],
+            cur_messages=[],
+        )
+        user_msg = args
+        coder.run(user_msg, preproc=False)
+
+        raise SwitchCoder(
+            edit_format=self.coder.edit_format,
+            from_coder=self.coder,
+            show_announcements=False,
+        )
+
 
     def get_help_md(self):
         "Show help about all commands in markdown"
