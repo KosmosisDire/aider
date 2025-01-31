@@ -660,6 +660,13 @@ def get_parser(default_config_files, git_root):
         default=False,
     )
     group.add_argument(
+        "--gui-port",
+        "--browser-port",
+        type=int,
+        help="Specify the port to run the browser GUI on (default: 8501)",
+        default=None,
+    )
+    group.add_argument(
         "--copy-paste",
         action=argparse.BooleanOptionalAction,
         default=False,

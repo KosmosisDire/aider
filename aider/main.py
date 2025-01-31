@@ -641,6 +641,8 @@ def main(argv=None, input=None, output=None, force_git_root=None, return_coder=F
         if not check_streamlit_install(io):
             analytics.event("exit", reason="Streamlit not installed")
             return
+        if args.gui_port:
+            os.environ["STREAMLIT_SERVER_PORT"] = str(args.gui_port)
         analytics.event("gui session")
         launch_gui(argv)
         analytics.event("exit", reason="GUI session ended")
